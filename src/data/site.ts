@@ -42,7 +42,7 @@ export const whyChooseUs = [
   'Erfaren personal med kvalitetssäkrad rutin',
   'Städgaranti – vi åtgärdar utan kostnad om något saknas',
   'Optimala produkter och noggrann slutkontroll',
-  'Fasta priser och snabb kommunikation',
+  'SUPERDUPERLÅGA priser och snabb kommunikation',
 ];
 
 export const prepChecklist = [
