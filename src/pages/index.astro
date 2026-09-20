@@ -1,0 +1,379 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {
+  site,
+  steps,
+  whyChooseUs,
+  prepChecklist,
+  cleaningSlides,
+  reviews,
+  faqs,
+} from '../data/site';
+import { KVM_OPTIONS, BADRUM_OPTIONS, YES_NO_OPTIONS } from '../lib/pricing';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title={site.title} description={site.description}>
+  <header class="site-header">
+    <div class="container">
+      <a href={base}>
+        <img src={`${base}images/logo.png`} alt={site.name} width="109" height="110" />
+      </a>
+      <nav>
+        <a href="#kalkylator">Pris</a>
+        <a href="#bokning">Boka</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <h1>Flyttstädning i Sundsvall – Från 35 kr/kvm</h1>
+        <p class="hero-lead">
+          Garanti &amp; fast pris. Vi har gjort flyttstädning så smidigt som möjligt för
+          privatpersoner i Sundsvall med omnejd. Hos oss behöver du varken ringa, skriva papper
+          eller boka möte. Allt sker digitalt, såvida du inte föredrar att ringa, då pratar vi
+          gärna!
+        </p>
+        <div class="hero-badges">
+          <span class="badge">100 % städgaranti</span>
+          <span class="badge">Fast pris</span>
+          <span class="badge">RUT-avdrag</span>
+        </div>
+        <a href="#bokning" class="btn">Boka flyttstädning idag</a>
+        <div class="google-rating">
+          <a href={site.googleReviews} target="_blank" rel="noopener noreferrer">
+            <img src={`${base}images/google-logo.webp`} alt="Google" width="32" height="32" />
+            Se våra recensioner på Google
+          </a>
+        </div>
+      </div>
+      <div>
+        <img src={`${base}images/hero.png`} alt="Flyttstädning i Sundsvall" width="500" height="400" />
+      </div>
+    </div>
+  </section>
+
+  <section id="sa-fungerar-det">
+    <div class="container">
+      <h2>Så fungerar det</h2>
+      <p>
+        När du bokar flyttstädning hos Norrland Service Group dras 50 % av arbetskostnaden
+        direkt på fakturan. Vi sköter hela ansökan om RUT-avdrag till Skatteverket – du behöver
+        inte göra någonting.
+      </p>
+      <div class="steps-grid">
+        {steps.map((step) => (
+          <div class="step-card">
+            <img src={`${base}images/${step.image}`} alt="" width="58" height="58" />
+            <p>{step.title}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="rut">
+    <div class="container two-col">
+      <div>
+        <h2>RUT-avdrag – enkelt och smidigt</h2>
+        <p>
+          När du bokar flyttstädning hos Norrland Service Group dras 50 % av arbetskostnaden
+          direkt på fakturan. Vi sköter hela ansökan om RUT-avdrag till Skatteverket – du
+          behöver inte göra någonting.
+        </p>
+        <p>
+          Priset i kalkylatorn visar totalpriset före RUT-avdrag. Efter RUT betalar du 50 % av
+          arbetskostnaden – från 35 kr/kvm.
+        </p>
+      </div>
+      <div class="cta-banner">
+        <h3>Boka flyttstädning idag utan jobbigt hembesök.</h3>
+        <ul class="feature-list" style="text-align: left; list-style: none; padding: 0;">
+          <li>✅ Få exakt pris direkt i kalkylatorn</li>
+          <li>✅ Signera avtal online med BankID</li>
+          <li>✅ 100 % städgaranti – du betalar först när du är nöjd</li>
+          <li>✅ Ingen kontakt behövs – vi städar medan du flyttar</li>
+        </ul>
+        <a href="#bokning" class="btn">Skicka bokningsförfrågan</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kalkylator">
+    <div class="container">
+      <h2>Kalkylera ditt pris här!</h2>
+      <p>
+        Oavsett om du flyttar från en lägenhet, villa eller radhus erbjuder vi flyttstädning
+        som uppfyller hyresvärdens krav. Vi använder de bästa rengöringsmedel och ser till att
+        allt blir skinande rent.
+      </p>
+      <div class="calculator">
+        <label for="calc-kvm">Hur många kvadratmeter är fastigheten på?</label>
+        <select id="calc-kvm" name="kvm">
+          {KVM_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+        </select>
+
+        <label for="calc-badrum">Hur många badrum/WC har fastigheten?</label>
+        <select id="calc-badrum" name="badrum">
+          {BADRUM_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+        </select>
+
+        <label for="calc-sprojs">Har fastigheten spröjs eller 4-sidiga fönster?</label>
+        <select id="calc-sprojs" name="sprojs">
+          {YES_NO_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+        </select>
+        <p class="form-hint">
+          Spröjs är oftast smala lister som används för att dela upp ett fönster i mindre
+          sektioner. Ett 4-sidigt fönster innebär ett fönster som går att öppna upp emellan.
+        </p>
+
+        <label for="calc-balkong">Har fastigheten inglasad balkong eller altan?</label>
+        <select id="calc-balkong" name="balkong">
+          {YES_NO_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+        </select>
+
+        <div class="price-total">
+          <p>Ditt pris för flyttstädningen</p>
+          <div class="amount" id="calc-total">1 595 kr</div>
+          <p class="note">Priset är före RUT-avdrag. Du betalar 50 % av arbetskostnaden efter avdrag.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="varfor">
+    <div class="container two-col">
+      <div>
+        <h2>Varför välja Norrland Service Group AB</h2>
+        <p>
+          Vi är en lokal städfirma i Sundsvall som fokuserar helt på flyttstädning. Det betyder
+          att vi kan erbjuda snabba tider, hög kvalitet och personlig service – men med full
+          digital bekvämlighet.
+        </p>
+        <ul class="feature-list">
+          {whyChooseUs.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Vi erbjuder flyttstädning i hela Sundsvall med omnejd</h2>
+        <p>
+          Förutom Sundsvall utför vi flyttstädning i: Timrå, Bergeforsen, Kvissleby,
+          Njurundabommen, Söråker och andra närliggande områden.
+        </p>
+        <p>Söker du flyttstädning i Sundsvall med garanti – då är du på rätt plats.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="garanti">
+    <div class="container">
+      <h2>Vår städgaranti – din trygghet</h2>
+      <p>
+        Om din hyresvärd eller köpare mot förmodan inte är nöjd med städningen, kommer vi
+        tillbaka och åtgärdar eventuella brister utan extra kostnad. Det är vår garanti till
+        dig – och anledningen till att så många kunder rekommenderar oss.
+      </p>
+    </div>
+  </section>
+
+  <section class="alt" id="forberedelser">
+    <div class="container">
+      <h2>Vad du behöver göra innan städningen</h2>
+      <ul class="checklist">
+        {prepChecklist.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section id="standard">
+    <div class="container">
+      <h2>Vår standard</h2>
+      <p>I listan nedanför så kan du se exakt hur vi städar din bostad, utan några undantag.</p>
+      <div class="slideshow">
+        <div class="slideshow-tabs" role="tablist">
+          {cleaningSlides.map((slide, i) => (
+            <button
+              class={`slideshow-tab${i === 0 ? ' active' : ''}`}
+              role="tab"
+              type="button"
+            >
+              {slide.title}
+            </button>
+          ))}
+        </div>
+        {cleaningSlides.map((slide, i) => (
+          <div class={`slideshow-panel${i === 0 ? ' active' : ''}`} role="tabpanel">
+            <h3>{slide.title}</h3>
+            <ul>
+              {slide.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+        <div class="slideshow-nav">
+          <button class="btn btn-outline" id="slide-prev" type="button">← Föregående</button>
+          <button class="btn btn-outline" id="slide-next" type="button">Nästa →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="recensioner">
+    <div class="container">
+      <h2>Recensioner från några av våra kunder</h2>
+      <div class="reviews-carousel">
+        <div class="review-track" id="review-track">
+          {reviews.map((review) => (
+            <div class="review-card">
+              <p>&quot;{review.text}&quot;</p>
+              <p class="author">{review.name}</p>
+            </div>
+          ))}
+        </div>
+        <div class="carousel-dots">
+          {reviews.map((_, i) => (
+            <button
+              class={`carousel-dot${i === 0 ? ' active' : ''}`}
+              type="button"
+              aria-label={`Recension ${i + 1}`}
+            />
+          ))}
+        </div>
+        <div class="slideshow-nav">
+          <button class="btn btn-outline" id="review-prev" type="button">← Föregående</button>
+          <button class="btn btn-outline" id="review-next" type="button">Nästa →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="container">
+      <h2>Har du frågor, eller vill du boka en flyttstädning?</h2>
+      <p>
+        Boka en flyttstädning genom att kontakta oss eller skicka in en bokningsförfrågan så
+        kontaktar vi dig oftast inom en timme och senaste inom 24 timmar.
+      </p>
+      <h3>Kontakta oss här!</h3>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <strong>Facebook</strong>
+          <p>
+            <a href={site.facebook} target="_blank" rel="noopener noreferrer">norrlandservicegroup</a>
+          </p>
+        </div>
+        <div class="contact-item">
+          <strong>E-post</strong>
+          <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        </div>
+        <div class="contact-item">
+          <strong>Telefon</strong>
+          <p>
+            <a href={`tel:${site.phoneE164}`}>{site.phone}</a>
+            ({site.phoneE164})
+          </p>
+        </div>
+      </div>
+      <p style="margin-top: 1.5rem; text-align: center;">
+        Allt sker lokalt – med riktiga människor, inte automatiserade system eller AI. Vi tror
+        på enkel och personlig service.
+      </p>
+    </div>
+  </section>
+
+  <section class="alt" id="bokning">
+    <div class="container">
+      <h2>Skicka in en bokningsförfrågan</h2>
+      <form class="booking-form" id="booking-form">
+        <div class="form-group">
+          <label for="form-kvm">Hur många kvadratmeter är fastigheten på?</label>
+          <select id="form-kvm" name="kvm" required>
+            {KVM_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="form-badrum">Hur många badrum/WC har fastigheten?</label>
+          <select id="form-badrum" name="badrum" required>
+            {BADRUM_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="form-sprojs">Har fastigheten spröjs eller 4-sidiga fönster?</label>
+          <select id="form-sprojs" name="sprojs" required>
+            {YES_NO_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="form-balkong">Har fastigheten inglasad balkong eller altan?</label>
+          <select id="form-balkong" name="balkong" required>
+            {YES_NO_OPTIONS.map((o) => <option value={o}>{o}</option>)}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="form-datum">Vilken datum önskar du flyttstäd?</label>
+          <input type="date" id="form-datum" name="datum" required />
+        </div>
+        <div class="form-group">
+          <label for="form-namn">För- och efternamn</label>
+          <input type="text" id="form-namn" name="namn" required />
+        </div>
+        <div class="form-group">
+          <label for="form-epost">E-post</label>
+          <input type="email" id="form-epost" name="epost" required />
+          <p class="form-hint">Du behöver ej fylla i telefon om du vill bli kontaktad genom e-post.</p>
+        </div>
+        <div class="form-group">
+          <label for="form-telefon">Telefon</label>
+          <input type="tel" id="form-telefon" name="telefon" />
+        </div>
+        <div class="form-group">
+          <label for="form-adress">Adress</label>
+          <input type="text" id="form-adress" name="adress" required />
+        </div>
+        <div class="form-group">
+          <label for="form-lagenhetsnummer">Lägenhetsnummer (om tillgängligt)</label>
+          <input type="text" id="form-lagenhetsnummer" name="lagenhetsnummer" />
+          <p class="form-hint">
+            Kan hittas på dörren, kontrakt och söksidor som Ratsit, Hitta, Eniro med mera...
+          </p>
+        </div>
+        <button type="submit" class="btn">Skicka in bokningsförfrågan</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <h2>Vanliga frågor</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <div class="faq-item">
+            <button class="faq-question" type="button">{faq.question}</button>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>{site.name}</strong></p>
+      <p>{site.address}</p>
+      <p>
+        E-post: <a href={`mailto:${site.email}`}>{site.email}</a>
+        ({site.altEmail})
+      </p>
+      <p>
+        <a href={site.googleMaps} target="_blank" rel="noopener noreferrer">Hitta oss på Google Maps</a>
+      </p>
+      <p>{site.copyright}</p>
+    </div>
+  </footer>
+</Layout>
