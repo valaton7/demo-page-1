@@ -32,9 +32,9 @@ describe('calculatePrice', () => {
     expect(calculatePrice(selection)).toBe(2295 + 700 + 500 + 500);
   });
 
-  it('uses top kvm tier for 125+ kvm', () => {
+  it('uses top kvm tier for 126+ kvm', () => {
     const selection: PriceSelection = {
-      kvm: '125+ kvm',
+      kvm: '126+ kvm',
       badrum: 'Fyra badrum/WC',
       sprojs: 'Ja',
       balkong: 'Ja',

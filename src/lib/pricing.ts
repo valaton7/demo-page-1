@@ -8,7 +8,7 @@ export type KvmOption =
   | '96 - 105 kvm'
   | '106 - 115 kvm'
   | '116 - 125 kvm'
-  | '125+ kvm';
+  | '126+ kvm';
 
 export type BadrumOption =
   | 'Ett badrum/WC'
@@ -35,7 +35,7 @@ const KVM_PRICES: Record<KvmOption, number> = {
   '96 - 105 kvm': 2995,
   '106 - 115 kvm': 3295,
   '116 - 125 kvm': 3495,
-  '125+ kvm': 5000,
+  '126+ kvm': 5000,
 };
 
 const BADRUM_PRICES: Record<BadrumOption, number> = {

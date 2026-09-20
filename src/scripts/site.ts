@@ -1,14 +1,11 @@
 import { buildBookingMailto } from '../lib/mailto';
 import {
-  BADRUM_OPTIONS,
   calculatePrice,
   formatPrice,
-  KVM_OPTIONS,
   type BadrumOption,
   type KvmOption,
   type PriceSelection,
   type YesNo,
-  YES_NO_OPTIONS,
 } from '../lib/pricing';
 
 function getSelectValue<T extends string>(id: string, fallback: T): T {
@@ -107,27 +104,7 @@ function initBookingForm(): void {
   });
 }
 
-function populateSelectOptions(): void {
-  const kvmSelect = document.getElementById('calc-kvm') as HTMLSelectElement | null;
-  const badrumSelect = document.getElementById('calc-badrum') as HTMLSelectElement | null;
-  const sprojsSelect = document.getElementById('calc-sprojs') as HTMLSelectElement | null;
-  const balkongSelect = document.getElementById('calc-balkong') as HTMLSelectElement | null;
-
-  if (kvmSelect) {
-    kvmSelect.innerHTML = KVM_OPTIONS.map((o) => `<option value="${o}">${o}</option>`).join('');
-  }
-  if (badrumSelect) {
-    badrumSelect.innerHTML = BADRUM_OPTIONS.map((o) => `<option value="${o}">${o}</option>`).join('');
-  }
-  for (const select of [sprojsSelect, balkongSelect]) {
-    if (select) {
-      select.innerHTML = YES_NO_OPTIONS.map((o) => `<option value="${o}">${o}</option>`).join('');
-    }
-  }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  populateSelectOptions();
   initCalculator();
   initSlideshow();
   initReviewsCarousel();

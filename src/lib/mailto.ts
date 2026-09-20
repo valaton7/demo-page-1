@@ -1,3 +1,4 @@
+import { site } from '../data/site';
 import type { BadrumOption, KvmOption, YesNo } from './pricing';
 
 export interface BookingFormData {
@@ -12,8 +13,6 @@ export interface BookingFormData {
   adress: string;
   lagenhetsnummer: string;
 }
-
-const BUSINESS_EMAIL = 'norrlandsg@tuta.com';
 
 export function buildBookingMailto(data: BookingFormData): string {
   const subject = 'Bokningsförfrågan – flyttstädning';
@@ -39,5 +38,5 @@ export function buildBookingMailto(data: BookingFormData): string {
     body,
   });
 
-  return `mailto:${BUSINESS_EMAIL}?${params.toString()}`;
+  return `mailto:${site.email}?${params.toString()}`;
 }
